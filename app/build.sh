@@ -8,7 +8,15 @@ cp app/assets/icon.png "$OUT/Contents/Resources/assets/icon.png"
 cp app/assets/AppIcon.icns "$OUT/Contents/Resources/AppIcon.icns"
 cp dist/MacPhone-Companion.apk "$OUT/Contents/Resources/"
 cp app/lan_pairing.py app/transfers.py app/device_profiles.py app/task_guard.py app/ai_actions.py app/tasks.py app/backend.py app/index.html app/mcp_server.py "$OUT/Contents/Resources/"
-cp scrcpy-macos-aarch64-v5.0.1/{adb,scrcpy,scrcpy-server,LICENSE} "$OUT/Contents/Resources/runtime/"
+# Give executable updates a fresh inode, including when the old ADB is still running.
+RUNTIME_STAGE=$(mktemp -d "$OUT/Contents/Resources/runtime/.update.XXXXXX")
+trap 'rm -rf "$RUNTIME_STAGE"' EXIT
+cp scrcpy-macos-aarch64-v5.0.1/{adb,scrcpy,scrcpy-server,LICENSE} "$RUNTIME_STAGE/"
+for resource in "$RUNTIME_STAGE"/*; do
+ mv -f "$resource" "$OUT/Contents/Resources/runtime/"
+done
+rmdir "$RUNTIME_STAGE"
+"$OUT/Contents/Resources/runtime/adb" version
 cp scrcpy/LICENSE "$OUT/Contents/Resources/SCRCPY-LICENSE"
 /usr/bin/python3 app/package_runtime.py "$OUT/Contents/Resources/python"
 swiftc app/Main.swift -o "$OUT/Contents/MacOS/MacPhone" -framework AppKit -framework WebKit
