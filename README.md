@@ -1,5 +1,11 @@
 # MacPhone
 
+## Overview
+
+MacPhone lets you control an Android phone from an Apple silicon Mac running macOS 26 or later. Connect over USB or Wi-Fi to view the phone’s screen, interact with apps, transfer files, and install APKs. Record and replay workflows for each device, connect a vision model for AI-assisted tasks, or control an authorized phone through a local MCP client such as Hermes.
+
+## 中文简介
+
 MacPhone 是一个面向 Apple 芯片 Mac 的安卓手机控制工具。通过 USB 或 Wi-Fi 连接手机，在 Mac 上查看画面、操作应用、管理文件，还可以录制常用流程，或通过视觉模型和 MCP 控制已授权的设备。
 
 ## 功能
