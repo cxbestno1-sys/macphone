@@ -1,0 +1,12 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.env
+.env.*
+*.keystore
+*.jks
+/android/build/
+/dist/
+/scrcpy/
+/scrcpy-macos-aarch64-v5.0.1*
+/mcp-config.json
